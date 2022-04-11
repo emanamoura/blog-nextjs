@@ -1,7 +1,30 @@
+:root {
+  --background: #282C34;
+  --title: #F8F8F8;
+  --highlight: #FF57B2;
+  --info: #BBBBBB;
+  --text: #D7D7D7;
+
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-// TODO
+h1, h2, h3, h4, h5 , h6, body, p {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--background);
+}
+
+a {
+  text-decoration: none;
+  color: #FF57B2;
+  font-weight: 600;
+}
