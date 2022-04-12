@@ -63,7 +63,13 @@ export default function Post( { post } : PostProps) {
             <div>
               <div>
                 <FiCalendar size={20} />
-                <p>{post.first_publication_date}</p>
+                <p>{format(
+      new Date(post.first_publication_date),
+      'dd MMM yyyy',
+      { 
+        locale: ptBR
+      }
+    )}</p>
               </div>
               <div>
                 <FiUser size={20}/>
@@ -77,10 +83,10 @@ export default function Post( { post } : PostProps) {
           </header>
 
           {post.data.content.map(content => (
-            <section>
+            <section key={content.heading} >
               <h2>{content.heading}</h2>
               {content.body.map(text => (
-                <p>{text.text}</p>
+                <p key={text.text}>{text.text}</p>
               ))}
             </section>  
           ))}
@@ -105,7 +111,6 @@ export const getStaticPaths : GetStaticPaths = async () => {
           }
         }
       })
-      console.log(slugs)
       return {
         paths: slugs,
         fallback: true
@@ -121,13 +126,8 @@ export const getStaticProps : GetStaticProps = async ({ params}) => {
   
   const post = {
     uid: response.uid,
-    first_publication_date: format(
-      new Date(response.first_publication_date),
-      'dd MMM yyyy',
-      { 
-        locale: ptBR
-      }
-    ),
+    first_publication_date: 
+      response.first_publication_date,
     data: {
       ...response.data,
     },
